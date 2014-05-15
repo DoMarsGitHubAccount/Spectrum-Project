@@ -41,9 +41,7 @@ void displayQuestions(int x, int y);
 
 void ClearScreen()
 {
-    int n;
-    for (n = 0; n < 5; n++)
-        printf( "\n\n\n\n\n\n\n\n\n\n" );
+    cout << string(50, '\n');
 }
 
 void displayTable()
@@ -586,6 +584,7 @@ int main(int argc, const char * argv[])
         cout << "---------------------------------------" << endl;
         cout << "Would you like to go again? (y for yes)" << endl;
         cin >> playAgain;
+        ClearScreen();
         
     }while (playAgain == 'y');
     

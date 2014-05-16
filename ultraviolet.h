@@ -25,7 +25,7 @@ public:
     {
         uvWavelength = "10 nm to 380 nm";
         uvFrequency = "30 PHz to 790 THz";
-        uvNature = "Sunlight";
+        uvNature = "Sun";
         uvUse = "Killing bacteria";
     }
     

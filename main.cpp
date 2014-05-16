@@ -24,6 +24,7 @@
 #include "infrared.h"
 #include "microwave.h"
 #include "radio.h"
+#include "grade.h"
 
 class gamma useGamma;
 xrays useXrays;
@@ -32,16 +33,18 @@ visible useVis;
 infrared useInf;
 microwave useMicro;
 radio useRad;
+grade useGrade;
 
 const double PI = 3.141592654;   //For "Extra"
 
 void displayTable();
 void randomizer();
 void displayQuestions(int x, int y);
+int answerCounts(int x, int y);
 
 void ClearScreen()
 {
-    cout << string(50, '\n');
+    cout << string(25, '\n');
 }
 
 void displayTable()
@@ -63,7 +66,7 @@ void displayTable()
     cout << "|-------------|--------------------|--------------------|-------------------|-------------------------|\n";
     cout << "| Ultraviolet |" << useUV.getWavelength() << setw(6) << "|";
     cout << useUV.getFrequency() << setw(4) << "|";
-    cout << useUV.getNature() << setw(12) << "|";
+    cout << useUV.getNature() << setw(17) << "|";
     cout << useUV.getUse() << setw(10) << "|" << endl;
     
     cout << "|-------------|--------------------|--------------------|-------------------|-------------------------|\n";
@@ -92,16 +95,6 @@ void displayTable()
     
     cout << "|_____________________________________________________________________________________________________|\n";
     
-}
-
-void randomizer()
-{
-    srand(time(NULL));
-    
-    int x = (rand() % 4) + 1;       //Generates random number between 1 and 4
-    int y = (rand() % 7) + 1;       //Generates random number between 1 and 7
-    
-    displayQuestions(x, y);
 }
 
 void displayQuestions(int x, int y)
@@ -315,10 +308,13 @@ void displayQuestions(int x, int y)
     if (answer == correctAnswer)
     {
         cout << "Good job!" << endl;
+        useGrade.setCorrectCount(1);
+        
     }
     else
     {
         cout << "That is incorrect." << endl;
+        useGrade.setIncorrectCount(1);
     }
 }
 
@@ -568,8 +564,11 @@ int main(int argc, const char * argv[])
         
         else if (choice == '2')
         {
+            int infoChoice = (rand() % 4) + 1;           //Generates random number between 1 and 4
+            int spectrumChoice = (rand() % 7) + 1;       //Generates random number between 1 and 7
+            
             ClearScreen();
-            randomizer();
+            displayQuestions(infoChoice, spectrumChoice);
         }
         else if (choice == '3')
         {
@@ -588,6 +587,10 @@ int main(int argc, const char * argv[])
         
     }while (playAgain == 'y');
     
+    cout << "Total Questions Answered: " << useGrade.getCorrectAnswerCount() + useGrade.getIncorrectAnswerCount() << endl;
+    cout << "------------------------------" << endl;
+    cout << "Correct: " << useGrade.getCorrectAnswerCount() << endl;
+    cout << "Incorrect: " << useGrade.getIncorrectAnswerCount() << endl;
 
     return 0;
 }

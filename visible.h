@@ -25,7 +25,7 @@ public:
     {
         visWavelength = "380 nm to 700 nm";
         visFrequency = "790 THz to 430 THz";
-        visNature = "Sunlight";
+        visNature = "Rainbows";
         visUse = "Flashlights";
     }
     
